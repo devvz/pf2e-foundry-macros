@@ -14,6 +14,7 @@ let effectArray = [
 
 // cascade start sequence
 async function startSequence() {
+    await Sequencer.Preloader.preloadForClients("test/angry-icon-12.png", false);
     await Sequencer.Preloader.preloadForClients(effectArray, false);
     new Sequence()
         .effect()

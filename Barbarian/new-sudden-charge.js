@@ -1,10 +1,3 @@
-// Requires the JB2A module - if you're using their free version, change the path to point to the right location
-// Then add this macro's name to the bottom of the Misty Step spell in the "On Use Macro" field
-
-//*---------------------------------------------------------*//
-//*----------------------ERROR CHECKING---------------------*//
-//*---------------------------------------------------------*//
-
 if(args[0] === "off"){
     return
 }
@@ -56,12 +49,21 @@ let position = await warpgate.crosshairs.show({
             .attachTo(crosshair)
             .persist()
             .opacity(0.5)
+            .name(`${tokenD.data.name}- Sudden Charge -${tokenD.data._id}`)
         .play();
  
 }})
- 
+
+await Sequencer.Preloader.preloadForClients([
+    "jb2a.misty_step.02.orange",
+    "jb2a.shield_themed.above.fire.01.orange",
+    "jb2a.ground_cracks.orange.03",
+    "jb2a.shield_themed.below.fire.03.orange"
+], false)
+
 await range[0].delete();
- 
+// await Sequencer.EffectManager.endEffects({`${tokenD.data.name}- Sudden Charge -${tokenD.data._id}`});
+
 new Sequence()
     .effect()
         .file("autoanimations.static.boulderimpact.01.white.0")
@@ -77,7 +79,7 @@ new Sequence()
     .effect()
         .file("jb2a.gust_of_wind.veryfast")
         .atLocation(tokenD)
-        .reachTowards(position)
+        .stretchTo(position)
     .animation()
         .on(tokenD)
         .teleportTo(position)

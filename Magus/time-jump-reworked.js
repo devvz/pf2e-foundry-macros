@@ -16,61 +16,6 @@ let effectArray = [
 ];
 // preload effects for clients
 await Sequencer.Preloader.preloadForClients(effectArray, false);
-
-// let crosshairsDistance = 0;
-// const checkDistance = async (crosshairs) => {
-//     new Sequence()
-//         .effect()
-//             .from(tokenD)
-//             .attachTo(crosshairs)
-//             .persist()
-//             .opacity(0.65)
-//             .name("tempIcon")
-//         // stretch effect from token to cursor
-//         // not sure how to calculate length needed
-//         .effect()
-//             .atLocation(tokenD)
-//             .stretchTo(crosshairs, { attachTo: true })
-//             .file("jb2a.energy_beam.normal.blue.01")
-//             .persist()
-//             .name("tempIcon")
-//         .play();
-//     while (crosshairs.inFlight) {
-//         //wait for initial render
-//         await warpgate.wait(100);
-
-//         const ray = new Ray(token.center, crosshairs);
-//         const distance = canvas.grid.measureDistances([{ ray }], { gridSpaces: true })[0];
-
-//         //only update if the distance has changed
-//         if (crosshairsDistance !== distance) {
-//             crosshairsDistance = distance;
-//             if (distance > distanceAvailable) {
-//                 crosshairs.drawIcon = true;
-//                 crosshairs.icon = 'icons/svg/hazard.svg';
-//             } else {
-//                 crosshairs.drawIcon = false;
-//             }
-
-//             crosshairs.draw();
-//             crosshairs.label = `${distance} ft`;
-//         }
-//     }
-// }
-
-// const location = await warpgate.crosshairs.show(
-//     {
-//         // swap between targeting the grid square vs intersection based on token's size
-//         interval: token.data.width % 2 === 0 ? 1 : -1,
-//         size: token.data.width,
-//         icon: tokenD.icon.src,
-//         label: '0 ft.',
-//         rememberControlled: true,
-//     },
-//     {
-//         show: checkDistance
-//     },
-// );
  
 let position = await warpgate.crosshairs.show({
     size: 1,
@@ -81,7 +26,7 @@ let position = await warpgate.crosshairs.show({
     drawOutline: true,
     drawIcon: false
 }, { show: async (crosshair) => {
- 
+
     new Sequence()
         .effect()
             .from(tokenD)
